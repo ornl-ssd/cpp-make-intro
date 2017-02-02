@@ -163,7 +163,7 @@ $ make
 then it recreates `isles.dat`:
 
 ~~~
-./wordcount books/isles.txt isles.dat
+./wordcount books/isles.txt > isles.dat
 ~~~
 {: .output}
 
@@ -261,15 +261,15 @@ wordcount : wordcount.cpp
 
 Now if we run the same command as before, we will see:
 
-> ~~~
-> $ make wordcount
-> ~~~
-> {: .bash}
->
-> ~~~
-> make: `wordcount' is up to date.
-> ~~~
-> {: .output}
+~~~
+$ make wordcount
+~~~
+{: .bash}
+
+~~~
+make: `wordcount' is up to date.
+~~~
+{: .output}
 
 We may want to remove all our data files so we can explicitly recreate
 them all. We can introduce a new target, and associated rule, to do
@@ -433,7 +433,7 @@ clean :
 The following figure shows a graph of the dependencies embodied within
 our Makefile, involved in building the `dats` target:
 
-![Dependencies represented within the Makefile](../fig/02-makefile.png "Dependencies represented within the Makefile")
+![Dependencies represented within the Makefile]({{ page.root }}/fig/02-makefile.png "Dependencies represented within the Makefile")
 
 > ## Write Two New Rules
 >
@@ -456,4 +456,4 @@ our Makefile, involved in building the `dats` target:
 The following figure shows the dependencies embodied within our
 Makefile, involved in building the `results.txt` target:
 
-![results.txt dependencies represented within the Makefile](../fig/02-makefile-challenge.png "results.txt dependencies represented within the Makefile")
+![results.txt dependencies represented within the Makefile]({{ page.root }}/fig/02-makefile-challenge.png "results.txt dependencies represented within the Makefile")
