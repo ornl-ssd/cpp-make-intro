@@ -40,7 +40,7 @@ Let us go through each line in turn:
   file that is needed to build or update the target. Targets can have
   zero or more dependencies.
 * A colon, `:`, separates targets from dependencies.
-* `python wordcount.py books/isles.txt isles.dat` is an
+* `./wordcount books/isles.txt > isles.dat` is an
   [action]({{ page.root }}/reference/#action), a command to run to build or update
   the target using the dependencies. Targets can have zero or more
   actions. These actions form a recipe to build the target
@@ -389,8 +389,8 @@ $ make dats
 then Make creates the data files:
 
 ~~~
-./wordcount.py books/isles.txt > isles.dat
-./wordcount.py books/abyss.txt > abyss.dat
+./wordcount books/isles.txt > isles.dat
+./wordcount books/abyss.txt > abyss.dat
 ~~~
 {: .output}
 
@@ -416,10 +416,10 @@ Our Makefile now looks like this:
 dats : isles.dat abyss.dat
 
 isles.dat : books/isles.txt
-        python wordcount.py books/isles.txt isles.dat
+        ./wordcount books/isles.txt > isles.dat
 
 abyss.dat : books/abyss.txt
-        python wordcount.py books/abyss.txt abyss.dat
+        ./wordcount books/abyss.txt > abyss.dat
 
 wordcount : wordcount.cpp
         c++ --std=c++11 -o wordcount wordcount.cpp
