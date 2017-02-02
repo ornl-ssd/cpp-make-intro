@@ -15,6 +15,9 @@ abyss.dat : books/abyss.txt
 last.dat : books/last.txt
 	./wordcount books/last.txt > last.dat
 
+wordcount : wordcount.cpp
+	c++ --std=c++11 -o wordcount wordcount.cpp
+
 .PHONY : clean
 clean :
 	rm -f *.dat

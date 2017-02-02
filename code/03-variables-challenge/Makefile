@@ -7,13 +7,16 @@ results.txt : *.dat
 dats : isles.dat abyss.dat last.dat
 
 isles.dat : books/isles.txt
-	python wordcount.py $< $@
+	./wordcount $< > $@
 
 abyss.dat : books/abyss.txt
-	python wordcount.py $< $@
+	./wordcount $< > $@
 
 last.dat : books/last.txt
-	python wordcount.py $< $@
+	./wordcount $< > $@
+
+wordcount : wordcount.cpp
+	c++ --std=c++11 -o wordcount wordcount.cpp
 
 .PHONY : clean
 clean :
