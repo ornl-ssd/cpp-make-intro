@@ -271,19 +271,6 @@ make: `wordcount' is up to date.
 ~~~
 {: .output}
 
-Note that there is a transitive dependency here, since we would like to recreate
-the data files if the `wordcount` program has changed. We can account for this by 
-adding `wordcount` to each of the rules for generating the data files.
-
-~~~
-isles.dat : books/isles.txt wordcount
-        ./wordcount books/isles.txt > isles.dat
-        
-abyss.dat : books/abyss.txt wordcount
-        ./wordcount books/abyss.txt > abyss.dat
-~~~
-{: .make}
-
 We may want to remove all our data files so we can explicitly recreate
 them all. We can introduce a new target, and associated rule, to do
 this. We will call it `clean`, as this is a common name for rules that
@@ -428,11 +415,11 @@ Our Makefile now looks like this:
 .PHONY : dats
 dats : isles.dat abyss.dat
 
-isles.dat : books/isles.txt wordcount
-        ./wordcount books/isles.txt > isles.dat
+isles.dat : books/isles.txt
+        python wordcount.py books/isles.txt isles.dat
 
-abyss.dat : books/abyss.txt wordcount
-        ./wordcount books/abyss.txt > abyss.dat
+abyss.dat : books/abyss.txt
+        python wordcount.py books/abyss.txt abyss.dat
 
 wordcount : wordcount.cpp
         c++ --std=c++11 -o wordcount wordcount.cpp
