@@ -26,7 +26,10 @@ results.txt : *.dat $(ZIPF_SRC)
 dats : isles.dat abyss.dat last.dat
 
 %.dat : books/%.txt $(COUNT_SRC)
-        $(COUNT_EXE) $< $*.dat
+        ./$(COUNT_EXE) $< > $*.dat
+
+$(COUNT_EXE) : $(COUNT_SRC)
+	c++ --std=c++11 -o $(COUNT_EXE) $(COUNT_SRC)
 
 .PHONY : clean
 clean :
@@ -84,7 +87,7 @@ The following figure shows the dependencies embodied within our Makefile,
 involved in building the `results.txt` target,
 once we have introduced our function:
 
-![results.txt dependencies after introducing a function](../fig/07-functions.png "results.txt dependencies after introducing a function")
+![results.txt dependencies after introducing a function]({{ page.root }}/fig/07-functions.png "results.txt dependencies after introducing a function")
 
 `patsubst` ('pattern substitution') takes a pattern, a replacement string and a
 list of names in that order; each name in the list that matches the pattern is
@@ -149,10 +152,10 @@ $ make dats
 We get:
 
 ~~~
-python wordcount.py books/abyss.txt abyss.dat
-python wordcount.py books/isles.txt isles.dat
-python wordcount.py books/last.txt last.dat
-python wordcount.py books/sierra.txt sierra.dat
+./wordcount books/abyss.txt > abyss.dat
+./wordcount books/isles.txt > isles.dat
+./wordcount books/last.txt > last.dat
+./wordcount books/sierra.txt > sierra.dat
 ~~~
 {: .output}
 
@@ -181,10 +184,10 @@ $ make results.txt
 We get:
 
 ~~~
-python wordcount.py books/abyss.txt abyss.dat
-python wordcount.py books/isles.txt isles.dat
-python wordcount.py books/last.txt last.dat
-python wordcount.py books/sierra.txt sierra.dat
+./wordcount books/abyss.txt > abyss.dat
+./wordcount books/isles.txt > isles.dat
+./wordcount books/last.txt > last.dat
+./wordcount books/sierra.txt > sierra.dat
 python zipf_test.py  last.dat  isles.dat  abyss.dat  sierra.dat > results.txt
 ~~~
 {: .output}
@@ -230,7 +233,10 @@ results.txt : $(DAT_FILES) $(ZIPF_SRC)
 dats : $(DAT_FILES)
 
 %.dat : books/%.txt $(COUNT_SRC)
-	$(COUNT_EXE) $< $*.dat
+	./$(COUNT_EXE) $< > $*.dat
+
+$(COUNT_EXE) : $(COUNT_SRC)
+	c++ --std=c++11 -o $(COUNT_EXE) $(COUNT_SRC)
 
 .PHONY : clean
 clean :
@@ -248,8 +254,8 @@ Remember, the `config.mk` file contains:
 
 ~~~
 # Count words script.
-COUNT_SRC=wordcount.py
-COUNT_EXE=python $(COUNT_SRC)
+COUNT_SRC=wordcount.cpp
+COUNT_EXE=wordcount
 
 # Test Zipf's rule
 ZIPF_SRC=zipf_test.py

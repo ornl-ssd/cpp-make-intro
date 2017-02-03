@@ -1,6 +1,6 @@
 # Count words script.
-COUNT_SRC=wordcount.py
-COUNT_EXE=python $(COUNT_SRC)
+COUNT_SRC=wordcount.cpp
+COUNT_EXE=wordcount
 
 # Test Zipf's rule
 ZIPF_SRC=zipf_test.py
