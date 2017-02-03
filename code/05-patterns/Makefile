@@ -6,8 +6,11 @@ results.txt : *.dat zipf_test.py
 .PHONY : dats
 dats : isles.dat abyss.dat last.dat
 
-%.dat : books/%.txt wordcount.py
-	python wordcount.py $< $*.dat
+%.dat : books/%.txt wordcount
+	./wordcount $< > $*.dat
+
+wordcount : wordcount.cpp
+	c++ --std=c++11 -o wordcount wordcount.cpp
 
 .PHONY : clean
 clean :
