@@ -8,8 +8,11 @@ results.txt : *.dat $(ZIPF_SRC)
 .PHONY : dats
 dats : isles.dat abyss.dat last.dat
 
-%.dat : books/%.txt $(COUNT_SRC)
-	$(COUNT_EXE) $< $*.dat
+%.dat : books/%.txt $(COUNT_EXE)
+	./$(COUNT_EXE) $< > $*.dat
+
+$(COUNT_EXE) : $(COUNT_SRC)
+	c++ --std=c++11 -o $(COUNT_EXE) $(COUNT_SRC)
 
 .PHONY : clean
 clean :

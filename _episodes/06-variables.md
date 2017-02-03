@@ -13,27 +13,34 @@ keypoints:
 ---
 
 Despite our efforts, our Makefile still has repeated content, namely
-the name of our script, `wordcount.py`. If we renamed our script we'd
-have to update our Makefile in multiple places.
+the name of our program, `wordcount` and the corresponding source file
+`wordcount.cpp`. If we renamed our program we'd have to update our 
+Makefile in multiple places.
 
 We can introduce a Make [variable]({{ page.root }}/reference/#variable) (called a
-[macro]({{ page.root }}/reference/#macro) in some versions of Make) to hold our
-script name:
+[macro]({{ page.root }}/reference/#macro) in some versions of Make) to hold the
+name of the source file:
 
 ~~~
-COUNT_SRC=wordcount.py
+COUNT_SRC=wordcount.cpp
 ~~~
 {: .make}
 
 This is a variable [assignment]({{ page.root }}/reference/#assignment) -
-`COUNT_SRC` is assigned the value `wordcount.py`.
+`COUNT_SRC` is assigned the value `wordcount.cpp`.
 
-`wordcount.py` is our script and it is invoked by passing it to
-`python`. We can introduce another variable to represent this
-execution:
+Defining the variable `COUNT_SRC` in this way allows us to easily
+change which source file is used to build the `wordcount` program. In the
+same way, we can also define the variable `COUNT_EXE` to
+refer to the `wordcount` program. 
+
+The `zipf-test.py` script is slightly different, but we can use the same 
+technique to define the variable `ZIPF_SRC` to refer to the script. Since 
+this script is invoked by passing it to `python`. We can introduce another 
+variable to represent this execution:
 
 ~~~
-COUNT_EXE=python $(COUNT_SRC)
+ZIPF_EXE=python $(ZIPF_SRC)
 ~~~
 {: .make}
 
@@ -42,14 +49,10 @@ is run. This is a variable [reference]({{ page.root }}/reference/#reference). At
 any place where we want to use the value of a variable we have to
 write it, or reference it, in this way.
 
-Here we reference the variable `COUNT_SRC`. This tells Make to
-replace the variable `COUNT_SRC` with its value `wordcount.py`. When
-Make is run it will assign to `COUNT_EXE` the value `python
-wordcount.py`.
-
-Defining the variable `COUNT_EXE` in this way allows us to easily
-change how our script is run (if, for example, we changed the language
-used to implement our script from Python to R).
+Here we reference the variable `ZIPF_SRC`. This tells Make to
+replace the variable `ZIPF_SRC` with its value `zipf-test.py`. When
+Make is run it will assign to `ZIPF_EXE` the value `python
+zipf-test.py`.
 
 > ## Use Variables
 >
@@ -72,8 +75,8 @@ the original makefile). Let us create `config.mk`:
 
 ~~~
 # Count words script.
-COUNT_SRC=wordcount.py
-COUNT_EXE=python $(COUNT_SRC)
+COUNT_SRC=wordcount.cpp
+COUNT_EXE=wordcount
 
 # Test Zipf's rule
 ZIPF_SRC=zipf_test.py
