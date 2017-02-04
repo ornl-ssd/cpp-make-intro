@@ -250,12 +250,12 @@ Now, we get:
 > the file exists but the Makefile has no rule for it.
 {: .callout}
 
-Let's add a rule to compile `wordcount.cpp` if it has changed. Make will use
+Let's add a rule to compile `wordcount` if its source files have changed. Make will use
 the same timestamp comparison to determine if the command should be run or not.
 
 ~~~
-wordcount : wordcount.cpp
-        c++ --std=c++11 -o wordcount wordcount.cpp
+wordcount : wordcount.cpp main.cpp
+        c++ --std=c++11 -o wordcount wordcount.cpp main.cpp
 ~~~
 {: .make}
 
@@ -421,8 +421,8 @@ isles.dat : books/isles.txt
 abyss.dat : books/abyss.txt
         ./wordcount books/abyss.txt > abyss.dat
 
-wordcount : wordcount.cpp
-        c++ --std=c++11 -o wordcount wordcount.cpp
+wordcount : wordcount.cpp main.cpp
+        c++ --std=c++11 -o wordcount wordcount.cpp main.cpp
 
 .PHONY : clean
 clean :

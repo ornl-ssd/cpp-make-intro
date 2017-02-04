@@ -73,8 +73,8 @@ dats : isles.dat abyss.dat last.dat
 %.dat : books/%.txt wordcount
       ./wordcount $< > $*.dat
 
-wordcount : wordcount.cpp
-	c++ --std=c++11 -o wordcount wordcount.cpp
+wordcount : wordcount.cpp main.cpp
+	c++ --std=c++11 -o wordcount wordcount.cpp main.cpp
 
 .PHONY : clean
 clean :

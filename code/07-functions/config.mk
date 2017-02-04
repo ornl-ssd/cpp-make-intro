@@ -1,5 +1,5 @@
-# Count words script.
-COUNT_SRC=wordcount.cpp
+# Count words program.
+COUNT_SRC=wordcount.cpp main.cpp
 COUNT_EXE=wordcount
 
 # Test Zipf's rule

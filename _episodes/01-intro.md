@@ -36,8 +36,10 @@ we will be working with:
 |  |- last.txt
 |  |- LICENSE_TEXTS.md
 |  |- sierra.txt
+|- main.cpp
 |- plotcount.py
 |- wordcount.cpp
+|- wordcount.h
 |- zipf_test.py
 ~~~
 {: .output}
@@ -47,7 +49,7 @@ the wordcount.cpp program. Assuming your C++ compiler is invoked using the `c++`
 somthing like this:
 
 ~~~
-c++ --std=c++11 -o wordcount wordcount.cpp
+c++ --std=c++11 -o wordcount wordcount.cpp main.cpp
 ~~~
 {: .bash}
 
@@ -184,7 +186,7 @@ Using your text editor of choice (e.g. nano), add the following to a new file na
 
 if [ $# -gt 0 ]; then
   if [ $1 = "need-to-compile" ]; then
-    c++ --std=c++11 -o wordcount wordcount.cpp
+    c++ --std=c++11 -o wordcount wordcount.cpp main.cpp
   fi
 fi
 
@@ -255,7 +257,7 @@ Another popular option is to comment out a subset of the lines in
 
 if [ $# -gt 0 ]; then
   if [ $1 = "need-to-compile" ]; then
-    c++ --std=c++11 -o wordcount wordcount.cpp
+    c++ --std=c++11 -o wordcount wordcount.cpp main.cpp
   fi
 fi
 
@@ -277,7 +279,7 @@ But commenting out these lines, and subsequently uncommenting them,
 can be a hassle and source of errors in complicated pipelines.
 
 Another problem is knowing if we need to recompile `wordcount`. How do we know
-if wordcount.cpp has changed so that we need to add the `need-to-compile`
+if `wordcount.cpp` or `main.cpp` have changed so that we need to add the `need-to-compile`
 option to the script?
 
 What we really want is an executable _description_ of our pipeline that

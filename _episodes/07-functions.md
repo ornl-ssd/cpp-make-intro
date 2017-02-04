@@ -25,7 +25,7 @@ results.txt : *.dat $(ZIPF_SRC)
 .PHONY : dats
 dats : isles.dat abyss.dat last.dat
 
-%.dat : books/%.txt $(COUNT_SRC)
+%.dat : books/%.txt $(COUNT_EXE)
         ./$(COUNT_EXE) $< > $*.dat
 
 $(COUNT_EXE) : $(COUNT_SRC)
@@ -232,7 +232,7 @@ results.txt : $(DAT_FILES) $(ZIPF_SRC)
 .PHONY : dats
 dats : $(DAT_FILES)
 
-%.dat : books/%.txt $(COUNT_SRC)
+%.dat : books/%.txt $(COUNT_EXE)
 	./$(COUNT_EXE) $< > $*.dat
 
 $(COUNT_EXE) : $(COUNT_SRC)
@@ -253,8 +253,8 @@ variables:
 Remember, the `config.mk` file contains:
 
 ~~~
-# Count words script.
-COUNT_SRC=wordcount.cpp
+# Count words program.
+COUNT_SRC=wordcount.cpp main.cpp
 COUNT_EXE=wordcount
 
 # Test Zipf's rule

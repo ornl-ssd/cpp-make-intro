@@ -13,24 +13,24 @@ keypoints:
 ---
 
 Despite our efforts, our Makefile still has repeated content, namely
-the name of our program, `wordcount` and the corresponding source file
-`wordcount.cpp`. If we renamed our program we'd have to update our 
+the name of our program, `wordcount` and the corresponding source files
+`wordcount.cpp` and `main.cpp`. If we renamed our program we'd have to update our 
 Makefile in multiple places.
 
 We can introduce a Make [variable]({{ page.root }}/reference/#variable) (called a
 [macro]({{ page.root }}/reference/#macro) in some versions of Make) to hold the
-name of the source file:
+name of the source files:
 
 ~~~
-COUNT_SRC=wordcount.cpp
+COUNT_SRC=wordcount.cpp main.cpp
 ~~~
 {: .make}
 
 This is a variable [assignment]({{ page.root }}/reference/#assignment) -
-`COUNT_SRC` is assigned the value `wordcount.cpp`.
+`COUNT_SRC` is assigned the value `wordcount.cpp main.cpp`.
 
 Defining the variable `COUNT_SRC` in this way allows us to easily
-change which source file is used to build the `wordcount` program. In the
+change which source files are used to build the `wordcount` program. In the
 same way, we can also define the variable `COUNT_EXE` to
 refer to the `wordcount` program. 
 
@@ -74,8 +74,8 @@ file that just holds variable definitions (i.e. delete them from
 the original makefile). Let us create `config.mk`:
 
 ~~~
-# Count words script.
-COUNT_SRC=wordcount.cpp
+# Count words program.
+COUNT_SRC=wordcount.cpp main.cpp
 COUNT_EXE=wordcount
 
 # Test Zipf's rule

@@ -1,6 +1,8 @@
-# Count words script.
-COUNT_SRC=wordcount.py
-COUNT_EXE=python $(COUNT_SRC)
+# Count words program.
+COUNT_SRC=wordcount.cpp main.cpp
+COUNT_OBJ=wordcount.o main.o
+COUNT_EXE=wordcount
+CXXFLAGS=--std=c++11
 
 # Plot word counts script.
 PLOT_SRC=plotcount.py

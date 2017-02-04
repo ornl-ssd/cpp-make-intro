@@ -33,6 +33,9 @@ abyss.dat : books/abyss.txt
 last.dat : books/last.txt
         ./wordcount books/last.txt > last.dat
 
+wordcount : wordcount.cpp main.cpp
+        c++ --std=c++11 -o wordcount wordcount.cpp main.cpp
+
 .PHONY : clean
 clean :
         rm -f *.dat
@@ -207,9 +210,9 @@ the same - as the input for the `zipf_test.py` script.
 
 However, for some rules, we may want to treat the first dependency
 differently. For example, our rules for `.dat` use their first (and
-only) dependency specifically as the input file to `wordcount.py`. If
+only) dependency specifically as the input file to `wordcount`. If
 we add additional dependencies (as we will soon do) then we don't want
-these being passed as input files to `wordcount.py` as it expects only
+these being passed as input files to `wordcount` as it expects only
 one input file to be named when it is invoked.
 
 Make provides an automatic variable for this, `$<` which means 'the

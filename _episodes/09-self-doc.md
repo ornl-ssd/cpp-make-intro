@@ -65,8 +65,10 @@ results.txt : $(DAT_FILES) $(ZIPF_SRC)
 .PHONY : dats
 dats : $(DAT_FILES)
 
-%.dat : books/%.txt $(COUNT_SRC)
-        $(COUNT_EXE) $< $*.dat
+%.dat : books/%.txt $(COUNT_EXE)
+        ./$(COUNT_EXE) $< > $*.dat
+
+$(COUNT_EXE) : $(COUNT_OBJ)
 
 ## clean       : Remove auto-generated files.
 .PHONY : clean

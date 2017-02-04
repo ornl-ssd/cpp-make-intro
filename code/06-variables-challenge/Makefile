@@ -1,4 +1,4 @@
-COUNT_SRC=wordcount.cpp
+COUNT_SRC=wordcount.cpp main.cpp
 COUNT_EXE=wordcount
 ZIPF_SRC=zipf_test.py
 ZIPF_EXE=python $(ZIPF_SRC)
@@ -11,7 +11,7 @@ results.txt : *.dat $(ZIPF_SRC)
 .PHONY : dats
 dats : isles.dat abyss.dat last.dat
 
-%.dat : books/%.txt $(COUNT_SRC)
+%.dat : books/%.txt $(COUNT_EXE)
 	./$(COUNT_EXE) $< > $*.dat
 	
 $(COUNT_EXE) : $(COUNT_SRC)
