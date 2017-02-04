@@ -74,8 +74,22 @@ $(COUNT_EXE) : $(COUNT_SRC)
 ~~~
 {: .make}
 
+~~~
+$ touch wordcount.cpp
+$ make
+c++ --std=c++11   -c -o wordcount.o wordcount.cpp
+c++ -o wordcount wordcount.o main.o
+./wordcount books/abyss.txt > abyss.dat
+./wordcount books/isles.txt > isles.dat
+./wordcount books/last.txt > last.dat
+./wordcount books/sierra.txt > sierra.dat
+python zipf_test.py  abyss.dat  isles.dat  last.dat  sierra.dat > results.txt
+~~~
+{: .shell}
+
 You should notice the `wordcount` program is still recompiled whenever a source
-file is changed, but now only the modified source file is recompiled.
+file is changed, but now only the modified source file (in this case `wordcount.cpp`)
+is recompiled.
 
 However, the changes we made have re-introduced a lot of redundancy. We could remove
 some of this by using variables again, such as using COUNT_OBJ to represent the object
@@ -122,14 +136,52 @@ $(COUNT_EXE) : $(COUNT_OBJ)
 ~~~
 {: .make}
 
-Note however that the commands being executed are slightly different from
+~~~
+$ touch wordcount.cpp
+$ make
+c++    -c -o wordcount.o wordcount.cpp
+wordcount.cpp:47:8: warning: 'auto' type specifier is a C++11 extension
+      [-Wc++11-extensions]
+  for (auto& word : words) {
+       ^
+wordcount.cpp:47:19: warning: range-based for loop is a C++11 extension
+      [-Wc++11-extensions]
+  for (auto& word : words) {
+                  ^
+wordcount.cpp:58:8: warning: 'auto' type specifier is a C++11 extension
+      [-Wc++11-extensions]
+  for (auto& kv : get_freq) {
+       ^
+wordcount.cpp:58:17: warning: range-based for loop is a C++11 extension
+      [-Wc++11-extensions]
+  for (auto& kv : get_freq) {
+                ^
+4 warnings generated.
+c++ -o wordcount wordcount.o main.o
+./wordcount books/abyss.txt > abyss.dat
+./wordcount books/isles.txt > isles.dat
+./wordcount books/last.txt > last.dat
+./wordcount books/sierra.txt > sierra.dat
+python zipf_test.py  abyss.dat  isles.dat  last.dat  sierra.dat > results.txt
+~~~
+{: .shell}
+
+Note however that the commands being executed are different from
 the orginal commands, they don't have the `--std=c++11` option. This may cause
 some compilers to generate warnings if they default to using an earlier
-C++ standard. We can solve this because implict rules also have implicit *variables*
+C++ standard. 
+
+We can solve this because implict rules also have implicit *variables*
 defined with them. In the case of the rule to generate an object file from
 a C++ source file, there is a variable called `CXXFLAGS` which are extra flags
-to be given to the compiler. We can even go one step further and remove the rules 
-altogether. Assuming we added `COUNT_OBJ`, `COUNT_EXE`, and `CXXFLAGS` to `config.mk`, our 
+to be given to the compiler. By setting this variable, we can modify the
+command that is executed by the implict rule.
+
+We can even go one step further and remove the rules altogether as make will still
+know that you want to use the implicit rule by specifying the object files as 
+part of the last compile rule.
+ 
+Assuming we added `COUNT_OBJ`, `COUNT_EXE`, and `CXXFLAGS` to `config.mk`, our 
 complete `Makefile` with these changes would be:
 
 ~~~
