@@ -205,8 +205,7 @@ make: `isles.dat' is up to date.
 {: .output}
 
 Nothing happens because Make attempts to build the first target it
-finds in the Makefile, the [default
-target]({{ page.root }}/reference/#default-target), which is `isles.dat` which is
+finds in the Makefile, the [default target]({{ page.root }}/reference/#default-target), which is `isles.dat` which is
 already up-to-date. We need to explicitly tell Make we want to build
 `abyss.dat`:
 
