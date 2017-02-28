@@ -3,8 +3,9 @@ layout: page
 title: "Setup"
 permalink: /setup/
 ---
+See [Training Setup]({{ site.url }}/training/setup)
 
-You need to download some files to follow this lesson:
+You also need to download some files to follow this lesson:
 
 1. Download [make-lesson.zip][zip-file].
 
@@ -28,9 +29,4 @@ You need to download some files to follow this lesson:
    ~~~
    {: .source}
 
-You also need to have the following software installed on your computer to
-follow this lesson:
-
-1. C++ compiler (e.g. GNU C or LLVM).
-
-[zip-file]: {{ page.root }}/files/make-lesson.zip
+[zip-file]: {{ site.github.url }}/files/make-lesson.zip
