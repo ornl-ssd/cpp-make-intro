@@ -173,11 +173,11 @@ Plus, no one wants to sit and wait for a command to finish, even just for 30
 seconds. Also if we need to make a change to `wordcount`, we have to remember
 the command we used to compile it.
 
-The most common solution to the tedium of data processing is to write
+One common solution to the tedium of data processing is to write
 a shell script that runs the whole pipeline from start to finish.
 
-Using your text editor of choice (e.g. nano), add the following to a new file named
-`run_pipeline.sh`.
+The following script is an example of what you might do to automate some of 
+this workflow:
 
 ~~~
 # USAGE: bash run_pipeline.sh [need_to_compile]
@@ -201,13 +201,6 @@ python zipf_test.py abyss.dat isles.dat > results.txt
 ~~~
 {: .bash}
 
-Run the script and check that the output is the same as before:
-
-~~~
-$ bash run_pipeline.sh
-~~~
-{: .bash}
-
 This shell script solves several problems in computational reproducibility:
 
 1.  It explicitly documents our pipeline,
@@ -220,63 +213,23 @@ This shell script solves several problems in computational reproducibility:
 
 Despite these benefits it has a few shortcomings.
 
-Let's adjust the width of the bars in our plot produced by `plotcount.py`.
-
-Edit `plotcount.py` so that the bars are 0.8 units wide instead of 1 unit.
-(Hint: replace `width = 1.0` with `width = 0.8` in the definition of
-`plot_word_counts`.)
+Suppose we want to adjust the way the `plotcount.py` program works, such as
+reducing the width of the bars in the plots.
 
 Now we want to recreate our figures.
+
 We _could_ just `bash run_pipeline.sh` again.
 That would work, but it could also be a big pain if counting words takes
 more than a few seconds.
 The word counting routine hasn't changed; we shouldn't need to recreate
 those files.
 
-Alternatively, we could manually rerun the plotting for each word-count file.
-(Experienced shell scripters can make this easier on themselves using a
-for-loop.)
+We have a few options in this case:
 
-~~~
-for book in abyss isles; do
-    python plotcount.py $book.dat $book.png
-done
-~~~
-{: .bash}
-
-With this approach, however,
-we don't get many of the benefits of having a shell script in the first place.
-
-Another popular option is to comment out a subset of the lines in
-`run_pipeline.sh`:
-
-~~~
-# USAGE: bash run_pipeline.sh
-# to produce plots for isles and abyss
-# and the summary table for the Zipf's law tests
-
-if [ $# -gt 0 ]; then
-  if [ $1 = "need-to-compile" ]; then
-    c++ --std=c++11 -o wordcount wordcount.cpp main.cpp
-  fi
-fi
-
-# These lines are commented out because they don't need to be rerun.
-#./wordcount books/isles.txt > isles.dat
-#./wordcount books/abyss.txt > abyss.dat
-
-python plotcount.py isles.dat isles.png
-python plotcount.py abyss.dat abyss.png
-
-# This line is also commented out because it doesn't need to be rerun.
-python zipf_test.py abyss.dat isles.dat > results.txt
-~~~
-{: .bash}
-
-Then, we would run our modified shell script using `bash run_pipeline.sh`.
-
-But commenting out these lines, and subsequently uncommenting them,
-can be a hassle and source of errors in complicated pipelines.
+* We could manually rerun the plotting for each word-count file. (Experienced shell scripters can make this easier on themselves using a
+for-loop.) With this approach, however, we don't get many of the benefits of having a shell script in the first place.
+* We could comment out a subset of the lines in the script to not run the wordcount progams, then run the script again. But commenting out 
+these lines, and subsequently uncommenting them, can be a hassle and source of errors in complicated pipelines.
 
 Another problem is knowing if we need to recompile `wordcount`. How do we know
 if `wordcount.cpp` or `main.cpp` have changed so that we need to add the `need-to-compile`
