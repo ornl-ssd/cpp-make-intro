@@ -5,8 +5,19 @@ import matplotlib.pyplot as plt
 import sys
 from collections import Sequence
 
-from wordcount import load_word_counts
-
+def load_word_counts(filename):
+    """
+    Load a list of (word, count, percentage) tuples from a file where each
+    line is of the form "word count percentage". Lines starting with # are
+    ignored.
+    """
+    counts = []
+    with open(filename, "r") as input_fd:
+        for line in input_fd:
+            if not line.startswith("#"):
+                fields = line.split()
+                counts.append((fields[0], int(fields[1]), float(fields[2])))
+    return counts
 
 def plot_word_counts(counts, limit=10):
     """

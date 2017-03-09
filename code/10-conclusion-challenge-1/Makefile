@@ -20,6 +20,7 @@ dats : $(DAT_FILES)
 	./$(COUNT_EXE) $< > $*.dat
 
 $(COUNT_EXE) : $(COUNT_OBJ)
+	c++ --std=c++11 -o $(COUNT_EXE) $(COUNT_OBJ)
 
 ## pngs        : Plot word counts.
 .PHONY : pngs
