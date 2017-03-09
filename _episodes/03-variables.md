@@ -14,7 +14,7 @@ keypoints:
 ---
 
 After the exercise at the end of the previous episode, our Makefile looked like this (download it from 
-[here]({{ page.root }}/code/02-makefile-challenge/Makefile):
+[here]({{ page.root }}/code/02-makefile-challenge/Makefile)):
 
 ~~~
 # Generate summary table.

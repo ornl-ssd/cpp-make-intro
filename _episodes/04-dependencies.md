@@ -13,7 +13,7 @@ keypoints:
 ---
 
 Our Makefile now looks like this (download it from 
-[here]({{ page.root }}/code/03-variables-challenge/Makefile):
+[here]({{ page.root }}/code/03-variables-challenge/Makefile)):
 
 ~~~
 # Generate summary table.
