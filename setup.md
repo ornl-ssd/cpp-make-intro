@@ -29,4 +29,4 @@ You also need to download some files to follow this lesson:
    ~~~
    {: .source}
 
-[zip-file]: {{ site.github.url }}/files/make-lesson.zip
+[zip-file]: {{ page.root }}/files/make-lesson.zip
