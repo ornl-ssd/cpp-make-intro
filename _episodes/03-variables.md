@@ -13,7 +13,8 @@ keypoints:
 - "Use `$<` to refer to the first dependency of the current rule."
 ---
 
-After the exercise at the end of the previous episode, our Makefile looked like this:
+After the exercise at the end of the previous episode, our Makefile looked like this (download it from 
+[here]({{ page.root }}/code/02-makefile-challenge/Makefile):
 
 ~~~
 # Generate summary table.

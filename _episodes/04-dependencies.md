@@ -12,7 +12,8 @@ keypoints:
 - "Dependencies are transitive: if A depends on B and B depends on C, a change to C will indirectly trigger an update to A."
 ---
 
-Our Makefile now looks like this:
+Our Makefile now looks like this (download it from 
+[here]({{ page.root }}/code/03-variables-challenge/Makefile):
 
 ~~~
 # Generate summary table.
