@@ -1,7 +1,7 @@
 ---
 title: "Introduction"
-teaching: 15
-exercises: 15
+teaching: 20
+exercises: 0
 questions:
 - "How can I make my results easier to reproduce?"
 objectives:

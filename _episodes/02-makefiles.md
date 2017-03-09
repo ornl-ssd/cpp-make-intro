@@ -1,6 +1,6 @@
 ---
 title: "Makefiles"
-teaching: 15
+teaching: 20
 exercises: 15
 questions:
 - "How do I write a simple Makefile?"

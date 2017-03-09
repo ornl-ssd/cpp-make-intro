@@ -1,6 +1,6 @@
 ---
 title: "Automatic Variables"
-teaching: 15
+teaching: 20
 exercises: 15
 questions:
 - "How can I abbreviate the rules in my Makefiles?"
