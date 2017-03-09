@@ -450,9 +450,9 @@ our Makefile, involved in building the `dats` target:
 > > ## Solution
 > > See [this file]({{ page.root }}/code/02-makefile-challenge/Makefile) for a solution.
 > {: .solution}
+>
+> The following figure shows the dependencies embodied within our
+> Makefile, involved in building the `results.txt` target:
+>
+> ![results.txt dependencies represented within the Makefile]({{ page.root }}/fig/02-makefile-challenge.png "results.txt dependencies represented within the Makefile")
 {: .challenge}
-
-The following figure shows the dependencies embodied within our
-Makefile, involved in building the `results.txt` target:
-
-![results.txt dependencies represented within the Makefile]({{ page.root }}/fig/02-makefile-challenge.png "results.txt dependencies represented within the Makefile")
