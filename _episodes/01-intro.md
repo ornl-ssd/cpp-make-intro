@@ -46,7 +46,7 @@ we will be working with:
 
 The first step is to count the frequency of each word in a book. In order to do this we need to compile
 the wordcount.cpp program. Assuming your C++ compiler is invoked using the `c++` command, you would do
-somthing like this:
+something like this:
 
 ~~~
 c++ --std=c++11 -o wordcount wordcount.cpp main.cpp
